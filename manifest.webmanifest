@@ -1,0 +1,18 @@
+{
+  "name": "Cat Builder - 猫画像プロンプトジェネレーター",
+  "short_name": "Cat Builder",
+  "description": "猫の見た目・性格・行動・背景・撮影設定まで細かく組み立ててAI画像生成用プロンプトを作るPWA",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#fff8f6",
+  "theme_color": "#ff86ad",
+  "lang": "ja",
+  "categories": ["entertainment", "photo", "utilities"],
+  "icons": [
+    {"src":"./icons/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any"},
+    {"src":"./icons/icon-maskable.svg","sizes":"any","type":"image/svg+xml","purpose":"maskable"}
+  ]
+}
