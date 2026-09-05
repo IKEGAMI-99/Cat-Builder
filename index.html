@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#ff86ad" />
+  <meta name="description" content="世界でいちばん可愛く猫画像プロンプトを作る Cat Builder" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="./icons/icon.svg" />
+  <link rel="stylesheet" href="./styles.css" />
+  <title>Cat Builder</title>
+</head>
+<body>
+  <div class="bg-sprinkles" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Cat Builder ホーム">
+      <span class="brand-mark">🐾</span>
+      <span><strong>Cat Builder</strong><small>ねこ画像プロンプト錬成所</small></span>
+    </a>
+    <div class="top-actions">
+      <button class="icon-btn" id="installBtn" type="button" hidden title="アプリをインストール">📲</button>
+      <button class="icon-btn" id="themeBtn" type="button" title="テーマ切替">🌙</button>
+    </div>
+  </header>
+
+  <main id="top" class="app-shell">
+    <section class="hero card candy-card">
+      <div class="hero-copy">
+        <span class="eyebrow">CAT PROMPT STUDIO ✦</span>
+        <h1>きみの理想の猫を<br><em>1匹ずつ、錬成。</em></h1>
+        <p>猫種、毛、目、耳、表情、行動、背景、レンズ、光まで。必要なら狂気の粒度で指定できます。</p>
+        <div class="mode-switch" role="group" aria-label="編集モード">
+          <button data-mode="easy" class="mode-btn active">🌷 かんたん</button>
+          <button data-mode="detail" class="mode-btn">🧁 詳細</button>
+          <button data-mode="madness" class="mode-btn">🧬 狂気</button>
+        </div>
+      </div>
+
+      <div class="preview-wrap">
+        <div class="preview-badge" id="previewBadge">TODAY'S CAT</div>
+        <svg id="catPreview" class="cat-preview" viewBox="0 0 340 300" role="img" aria-label="猫プレビュー">
+          <defs>
+            <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
+              <feDropShadow dx="0" dy="10" stdDeviation="9" flood-opacity=".16" />
+            </filter>
+          </defs>
+          <g filter="url(#softShadow)" class="cat-group">
+            <path class="tail" d="M255 205 C315 178, 320 245, 281 253 C252 259, 258 231, 278 231" />
+            <ellipse class="body" cx="184" cy="205" rx="93" ry="70" />
+            <ellipse class="chest" cx="147" cy="218" rx="36" ry="42" />
+            <path class="ear ear-left" d="M104 88 L126 36 L153 91 Z" />
+            <path class="ear ear-right" d="M199 91 L231 40 L243 106 Z" />
+            <circle class="head" cx="174" cy="125" r="78" />
+            <path class="face-patch" d="M118 120 C128 74 170 69 185 96 C203 76 229 95 231 127 C224 166 194 188 169 188 C138 187 116 161 118 120Z" />
+            <ellipse class="eye eye-left" cx="147" cy="124" rx="13" ry="16" />
+            <ellipse class="eye eye-right" cx="202" cy="124" rx="13" ry="16" />
+            <ellipse class="pupil pupil-left" cx="147" cy="125" rx="5" ry="10" />
+            <ellipse class="pupil pupil-right" cx="202" cy="125" rx="5" ry="10" />
+            <path class="nose" d="M169 148 Q175 143 181 148 Q176 157 169 148Z" />
+            <path class="mouth" d="M175 155 Q167 164 159 158 M175 155 Q183 164 192 158" />
+            <g class="whiskers">
+              <path d="M150 154 L92 145 M150 162 L88 165 M198 154 L254 143 M198 162 L258 167" />
+            </g>
+            <ellipse class="paw paw-left" cx="130" cy="260" rx="31" ry="18" />
+            <ellipse class="paw paw-right" cx="191" cy="260" rx="31" ry="18" />
+          </g>
+          <g class="sparkles" aria-hidden="true"><text x="40" y="80">✦</text><text x="287" y="95">♡</text><text x="45" y="235">✧</text></g>
+        </svg>
+        <div class="cat-summary" id="catSummary">ラグドール · ブルーポイント · 青い目</div>
+      </div>
+    </section>
+
+    <section class="quick-tools card">
+      <div class="section-title-row">
+        <div><span class="eyebrow">RANDOM LAB</span><h2>🎲 ランダム猫</h2></div>
+        <button id="lockAllBtn" class="ghost-btn" type="button">🔒 全ロック</button>
+      </div>
+      <div class="random-presets" id="randomPresets">
+        <button data-preset="normal">🐾 おまかせ</button>
+        <button data-preset="cute">🎀 かわいい</button>
+        <button data-preset="photo">📷 写真</button>
+        <button data-preset="cinema">🎬 映画</button>
+        <button data-preset="japan">⛩️ 日本猫</button>
+        <button data-preset="fantasy">🪄 幻想</button>
+        <button data-preset="cyber">🌃 サイバー</button>
+        <button data-preset="chaos">🫠 カオス</button>
+      </div>
+      <p class="microcopy">🔒した項目は固定。各項目の 🎲 なら、その項目だけ振り直せます。</p>
+    </section>
+
+    <section class="builder-layout">
+      <aside class="category-nav card" id="categoryNav" aria-label="カテゴリ"></aside>
+
+      <section class="builder-main">
+        <div class="builder-toolbar card">
+          <label class="search-box">🔎 <input id="settingSearch" type="search" placeholder="設定を検索… 例：目、しっぽ、85mm" /></label>
+          <div class="counter-pill"><span id="visibleCount">0</span> 項目</div>
+        </div>
+        <div id="settingsRoot"></div>
+      </section>
+    </section>
+
+    <section class="extras-grid">
+      <div class="card extras-card">
+        <div class="section-title-row"><div><span class="eyebrow">FINISHING</span><h2>✨ 追加ニュアンス</h2></div></div>
+        <textarea id="customNote" rows="4" placeholder="例：首元の毛だけ少し寝癖っぽく。少しだけ首をかしげる。背景の看板文字は読めない程度にぼかす。"></textarea>
+        <div class="negative-grid" id="negativeGrid"></div>
+      </div>
+
+      <div class="card profile-card">
+        <div class="section-title-row"><div><span class="eyebrow">MY CATS</span><h2>💗 うちの猫保存</h2></div></div>
+        <div class="profile-save-row">
+          <input id="profileName" placeholder="猫の名前（例：ミルク）" maxlength="24" />
+          <button id="saveProfileBtn" class="primary-small" type="button">保存</button>
+        </div>
+        <div id="profilesList" class="profiles-list"></div>
+      </div>
+    </section>
+
+    <section class="prompt-panel card" id="promptPanel">
+      <div class="section-title-row prompt-heading">
+        <div><span class="eyebrow">PROMPT ALCHEMY</span><h2>🐈‍⬛ プロンプト完成</h2></div>
+        <div class="prompt-langs">
+          <button class="lang-btn active" data-lang="ja">日本語</button>
+          <button class="lang-btn" data-lang="en">English</button>
+        </div>
+      </div>
+
+      <div class="target-tabs" id="targetTabs">
+        <button class="target-tab active" data-target="chatgpt">ChatGPT</button>
+        <button class="target-tab" data-target="gemini">Gemini</button>
+        <button class="target-tab" data-target="midjourney">Midjourney</button>
+        <button class="target-tab" data-target="flux">FLUX / SD</button>
+        <button class="target-tab" data-target="plain">汎用</button>
+      </div>
+
+      <div class="prompt-box">
+        <textarea id="promptOutput" rows="10" spellcheck="false"></textarea>
+        <button id="copyBtn" class="copy-float" type="button">📋 コピー</button>
+      </div>
+
+      <div class="send-grid">
+        <button class="ai-button chatgpt" data-ai="chatgpt"><span>✦</span> ChatGPTへ</button>
+        <button class="ai-button gemini" data-ai="gemini"><span>✧</span> Geminiへ</button>
+        <button class="ai-button claude" data-ai="claude"><span>✽</span> Claudeへ</button>
+        <button class="ai-button share" id="shareBtn"><span>↗</span> 共有</button>
+      </div>
+      <p class="microcopy">AI側の仕様で直接入力できない場合は、プロンプトを自動コピーしてAIを開きます。モバイルでは「共有」から対応アプリへ渡せます。</p>
+    </section>
+  </main>
+
+  <footer>
+    <span>Made with 🐾 and an unreasonable amount of cat parameters.</span>
+    <span>Cat Builder · Offline-ready PWA</span>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="./app.js" defer></script>
+</body>
+</html>
