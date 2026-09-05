@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#ff86ad" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="./icons/icon-192.png" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./pages.css" />
+  <title>ランダムモード · Cat Builder</title>
+</head>
+<body class="random-page">
+  <div class="bg-sprinkles" aria-hidden="true"></div>
+  <header class="topbar">
+    <a class="back-home" href="./">← <span>モード選択</span></a>
+    <a class="brand compact-brand" href="./"><span class="brand-mark">🐾</span><span><strong>Cat Builder</strong><small>ランダムモード</small></span></a>
+    <div class="top-actions"><a class="mode-jump" href="./builder.html">✎ 通常モード</a><button class="icon-btn" id="installBtn" type="button" hidden>📲</button><button class="icon-btn" id="themeBtn" type="button">🌙</button></div>
+  </header>
+
+  <main class="app-shell random-shell">
+    <section class="random-stage card candy-card">
+      <div class="random-copy">
+        <span class="eyebrow">RANDOM MODE ✦</span>
+        <h1>猫運に、<em>まかせる。</em></h1>
+        <p>好きな雰囲気を1つ押すだけ。猫種から背景、撮影設定までまとめてランダム生成します。</p>
+      </div>
+      <div class="random-preview-wrap">
+        <div class="preview-badge" id="previewBadge">TODAY'S CAT</div>
+        <svg id="catPreview" class="cat-preview random-cat-preview" viewBox="0 0 340 300" role="img" aria-label="ランダム猫プレビュー">
+          <g class="cat-group">
+            <path class="tail" d="M255 205 C315 178, 320 245, 281 253 C252 259, 258 231, 278 231" />
+            <ellipse class="body" cx="184" cy="205" rx="93" ry="70" /><ellipse class="chest" cx="147" cy="218" rx="36" ry="42" />
+            <path class="ear" d="M104 88 L126 36 L153 91 Z" /><path class="ear" d="M199 91 L231 40 L243 106 Z" />
+            <circle class="head" cx="174" cy="125" r="78" /><path class="face-patch" d="M118 120 C128 74 170 69 185 96 C203 76 229 95 231 127 C224 166 194 188 169 188 C138 187 116 161 118 120Z" />
+            <ellipse class="eye" cx="147" cy="124" rx="13" ry="16" /><ellipse class="eye" cx="202" cy="124" rx="13" ry="16" />
+            <ellipse class="pupil" cx="147" cy="125" rx="5" ry="10" /><ellipse class="pupil" cx="202" cy="125" rx="5" ry="10" />
+            <path class="nose" d="M169 148 Q175 143 181 148 Q176 157 169 148Z" /><path class="mouth" d="M175 155 Q167 164 159 158 M175 155 Q183 164 192 158" />
+            <g class="whiskers"><path d="M150 154 L92 145 M150 162 L88 165 M198 154 L254 143 M198 162 L258 167" /></g>
+            <ellipse class="paw" cx="130" cy="260" rx="31" ry="18" /><ellipse class="paw" cx="191" cy="260" rx="31" ry="18" />
+          </g>
+        </svg>
+        <div class="cat-summary random-summary" id="catSummary">猫を錬成中…</div>
+      </div>
+    </section>
+
+    <section class="random-picker card">
+      <div class="section-title-row"><div><span class="eyebrow">CHOOSE A VIBE</span><h2>🎲 どんなランダムにする？</h2></div></div>
+      <div class="random-presets big-random-presets" id="randomPresets">
+        <button data-preset="normal"><b>🐾</b><span>完全おまかせ<small>なんでもあり</small></span></button>
+        <button data-preset="cute"><b>🎀</b><span>かわいい<small>ふわふわ・愛嬌</small></span></button>
+        <button data-preset="photo"><b>📷</b><span>写真<small>自然でリアル</small></span></button>
+        <button data-preset="cinema"><b>🎬</b><span>映画<small>ドラマチック</small></span></button>
+        <button data-preset="japan"><b>⛩️</b><span>日本猫<small>和の世界</small></span></button>
+        <button data-preset="fantasy"><b>🪄</b><span>幻想<small>魔法と異世界</small></span></button>
+        <button data-preset="cyber"><b>🌃</b><span>サイバー<small>ネオンと未来</small></span></button>
+        <button data-preset="chaos"><b>🫠</b><span>カオス<small>猫に責任はない</small></span></button>
+      </div>
+    </section>
+
+    <section class="prompt-panel card random-result" id="promptPanel">
+      <div class="section-title-row prompt-heading">
+        <div><span class="eyebrow">RESULT</span><h2>✨ この猫で生成</h2></div>
+        <div class="prompt-langs"><button class="lang-btn active" data-lang="ja">日本語</button><button class="lang-btn" data-lang="en">English</button></div>
+      </div>
+      <div class="target-tabs" id="targetTabs">
+        <button class="target-tab active" data-target="chatgpt">ChatGPT</button><button class="target-tab" data-target="gemini">Gemini</button><button class="target-tab" data-target="midjourney">Midjourney</button><button class="target-tab" data-target="flux">FLUX / SD</button><button class="target-tab" data-target="plain">汎用</button>
+      </div>
+      <div class="prompt-box"><textarea id="promptOutput" rows="10" spellcheck="false"></textarea><button id="copyBtn" class="copy-float" type="button">📋 コピー</button></div>
+      <details class="random-extra"><summary>✎ ひとこと追加する</summary><textarea id="customNote" rows="3" placeholder="例：もっと楽しそうな雰囲気に。背景は少しボケ気味。"></textarea><div class="negative-grid" id="negativeGrid"></div></details>
+      <div class="send-grid"><button class="ai-button chatgpt" data-ai="chatgpt"><span>✦</span> ChatGPTへ</button><button class="ai-button gemini" data-ai="gemini"><span>✧</span> Geminiへ</button><button class="ai-button claude" data-ai="claude"><span>✽</span> Claudeへ</button><button class="ai-button share" id="shareBtn"><span>↗</span> 共有</button></div>
+    </section>
+  </main>
+
+  <div class="app-compat" hidden>
+    <div id="categoryNav"></div><input id="settingSearch"><span id="visibleCount"></span><div id="settingsRoot"></div><button id="lockAllBtn"></button><input id="profileName"><button id="saveProfileBtn"></button><div id="profilesList"></div>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script>try{const d=JSON.parse(localStorage.getItem('catbuilder.draft')||'null');if(d){d.locks={};localStorage.setItem('catbuilder.draft',JSON.stringify(d));}}catch{} localStorage.removeItem('catbuilder.profiles');</script>
+  <script src="./app.js" defer></script>
+  <script defer>
+    document.addEventListener('DOMContentLoaded',()=>{setTimeout(()=>{if(typeof randomize==='function')randomize('normal')},0);});
+  </script>
+</body>
+</html>
